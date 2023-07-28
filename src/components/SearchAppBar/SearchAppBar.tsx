@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import InputBase from "@mui/material/InputBase";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
+import AppBarFilters from "../Filters/AppBarFilters";
 
 export const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -16,8 +17,9 @@ export const Search = styled("div")(({ theme }) => ({
   "&:hover": {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
-  marginLeft: "50%",
-  marginRight: "50%",
+  // marginLeft: "50%",
+  // marginRight: "50%",
+  justifySelf: "end",
   width: "100%",
   [theme.breakpoints.up("sm")]: {
     marginLeft: theme.spacing(1),
@@ -44,9 +46,9 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("sm")]: {
-      width: "12ch",
+      width: "16ch",
       "&:focus": {
-        width: "20ch",
+        width: "32ch",
       },
     },
   },
@@ -57,7 +59,7 @@ export function SearchAppBar() {
     <AppBar>
       <Toolbar>
         <Typography
-          variant="h6"
+          variant="h3"
           noWrap
           component="div"
           sx={{ display: { xs: "none", sm: "block" }, flexGrow: 1 }}
@@ -73,6 +75,7 @@ export function SearchAppBar() {
             inputProps={{ "aria-label": "search" }}
           />
         </Search>
+        <AppBarFilters />
       </Toolbar>
     </AppBar>
   );

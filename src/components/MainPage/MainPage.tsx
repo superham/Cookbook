@@ -16,6 +16,7 @@ import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Slide, useScrollTrigger } from "@mui/material";
+import { useState } from "react";
 import {
   Search,
   SearchAppBar,
@@ -23,6 +24,7 @@ import {
   StyledInputBase,
 } from "../SearchAppBar/SearchAppBar";
 import SearchIcon from "@mui/icons-material/Search";
+import Filters from "../Filters/Filters";
 
 function Copyright() {
   return (
@@ -66,16 +68,11 @@ export default function MainPage() {
             pb: 6,
           }}
         >
-          <Container maxWidth="sm">
-            <Typography
-              component="h1"
-              variant="h2"
-              align="center"
-              color="text.primary"
-              gutterBottom
-            >
-              Cookbook
-            </Typography>
+          <Container
+            maxWidth="sm"
+            sx={{ paddingTop: "1rem" }}
+            style={{ borderBottom: "1px solid #393939" }}
+          >
             <Typography
               variant="h5"
               align="center"
@@ -84,16 +81,8 @@ export default function MainPage() {
             >
               A collection of things that turned out well
             </Typography>
-            <Stack
-              sx={{ pt: 4 }}
-              direction="row"
-              spacing={2}
-              justifyContent="center"
-            >
-              <Button variant="contained">Main call to action</Button>
-              <Button variant="outlined">Secondary action</Button>
-            </Stack>
           </Container>
+          <Filters />
         </Box>
         <Container sx={{ py: 8 }} maxWidth="md">
           {/* End hero unit */}
