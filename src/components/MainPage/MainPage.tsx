@@ -16,6 +16,13 @@ import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Slide, useScrollTrigger } from "@mui/material";
+import {
+  Search,
+  SearchAppBar,
+  SearchIconWrapper,
+  StyledInputBase,
+} from "../SearchAppBar/SearchAppBar";
+import SearchIcon from "@mui/icons-material/Search";
 
 function Copyright() {
   return (
@@ -33,23 +40,23 @@ function Copyright() {
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 // TODO remove, this demo shouldn't need to reset the theme.
-const defaultTheme = createTheme();
+const defaultTheme = createTheme({
+  typography: {
+    fontFamily: ["Cormorant Garamond", "serif"].join(","),
+    fontSize: 14,
+    fontWeightLight: 300,
+    fontWeightRegular: 400,
+    fontWeightMedium: 500,
+  },
+});
 
 export default function MainPage() {
   const trigger = useScrollTrigger();
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
-      <Slide appear={false} direction="down" in={!trigger}>
-        <AppBar>
-          <Toolbar>
-            <CameraIcon sx={{ mr: 2 }} />
-            <Typography variant="h6" color="inherit" noWrap>
-              Cookbook
-            </Typography>
-          </Toolbar>
-        </AppBar>
-      </Slide>
+      <SearchAppBar />
       <main>
         {/* Hero unit */}
         <Box
