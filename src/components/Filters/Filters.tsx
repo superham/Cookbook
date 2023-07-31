@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import { AppFiltersContext } from "src/context/FiltersContext";
+import { useFilters } from "../../use/useFilters/useFilters";
 
 interface variants {
   outlined: "outlined";
@@ -19,45 +19,47 @@ interface ChipActionsProps {
   text: string;
 }
 
+interface handleClickProps {
+  text: string;
+  filter: boolean | undefined;
+}
+
 function FilterGroup() {
-  const handleClick = () => {
-    console.info("You clicked the Chip.");
+  const handleClick = ({ text, filter, filterMap }: any) => {
+    console.info(`You clicked the ${text} chip`);
+    console.info(`State is ${filter}`);
+    console.info("----------------");
   };
 
   const handleDelete = () => {
     console.info("You clicked the delete icon.");
   };
 
-  //   function ChipActions(text: ChipActionsProps) {
-  //     const [varient, setVarient] = useState<"outlined" | "filled" | undefined>(
-  //       "outlined"
-  //     );
+  const getVarient = (varient: boolean | undefined) => {
+    if (varient) {
+      return "outlined";
+    }
 
-  //     return (
-  //       <Chip
-  //         label={text.text}
-  //         onClick={() =>
-  //           varient === "filled" ? setVarient("outlined") : setVarient("filled")
-  //         }
-  //         variant={varient}
-  //         // onDelete={handleDelete}
-  //         sx={{ width: "5rem" }}
-  //       />
-  //     );
-  //   }
+    return "filled";
+  };
 
   function ChipActions(text: ChipActionsProps) {
-    const [varient, setVarient] = useState<"outlined" | "filled" | undefined>(
-      "outlined"
-    );
+    const filterMap = useFilters();
+    const varient = filterMap.filterMap.get(text.text);
+    console.log(varient);
 
     return (
       <Chip
         label={text.text}
-        onClick={() =>
-          varient === "filled" ? setVarient("outlined") : setVarient("filled")
-        }
-        variant={varient}
+        onClick={() => {
+          console.info(`You clicked the ${text.text} chip`);
+          console.info(`State is ${varient}`);
+          console.info("----------------");
+
+          const updatedMap = filterMap.setFilterMap(text.text, !varient);
+          filterMap.setFilterMap();
+        }}
+        variant={getVarient(varient)}
         // onDelete={handleDelete}
         sx={{ width: "5rem" }}
       />
