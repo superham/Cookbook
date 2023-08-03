@@ -7,7 +7,7 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useFilters } from "../../use/useFilters/useFilters";
 
 interface variants {
@@ -25,48 +25,23 @@ interface handleClickProps {
 }
 
 function FilterGroup() {
-  const handleClick = ({ text, filter, filterMap }: any) => {
-    console.info(`You clicked the ${text} chip`);
-    console.info(`State is ${filter}`);
-    console.info("----------------");
-  };
-
-  const handleDelete = () => {
-    console.info("You clicked the delete icon.");
-  };
-
-  const getVarient = (varient: boolean | undefined) => {
-    if (varient) {
-      return "outlined";
-    }
-
-    return "filled";
-  };
-
   function ChipActions(text: ChipActionsProps) {
     const filterMap = useFilters();
-    const varient = filterMap.filterMap.get(text.text);
-    console.log(varient);
+    const [state, setState] = useState(false);
 
     return (
       <Chip
         label={text.text}
         onClick={() => {
-          console.info(`You clicked the ${text.text} chip`);
-          console.info(`State is ${varient}`);
-          console.info("----------------");
-
-          const updatedMap = filterMap.setFilterMap(text.text, !varient);
-          filterMap.setFilterMap();
+          filterMap.updateFilters(text.text);
+          setState(filterMap.filterMap.get(text.text) || false);
         }}
-        variant={getVarient(varient)}
-        // onDelete={handleDelete}
+        variant={!state ? "outlined" : "filled"}
         sx={{ width: "5rem" }}
       />
     );
   }
 
-  // TODO: chips lose state when out of view....
   return (
     <Container
       maxWidth="md"

@@ -1,4 +1,10 @@
-import React, { useState } from "react";
+import { FilterDrama } from "@mui/icons-material";
+import React, { useState, useEffect } from "react";
+
+interface updateFiltersProps {
+  type: string;
+  active: boolean;
+}
 
 function useFilters() {
   const [filterMap, setFilterMap] = useState(
@@ -23,7 +29,14 @@ function useFilters() {
     ])
   );
 
-  return { filterMap, setFilterMap };
+  const updateFilters = (type: string) => {
+    let updatedMap = filterMap;
+    const currState = updatedMap.get(type);
+    updatedMap.set(type, !currState);
+    setFilterMap(updatedMap);
+  };
+
+  return { filterMap, updateFilters };
 }
 
 export { useFilters };

@@ -1,5 +1,6 @@
 import { Card, Chip, Grid, Container } from "@mui/material";
 import { useState } from "react";
+import { useFilters } from "src/use/useFilters/useFilters";
 
 interface ChipActionsProps {
   text: string;
@@ -10,16 +11,16 @@ const handleDelete = () => {
   console.info("You clicked the delete icon.");
 };
 function ChipActions({ text, setDisplay }: ChipActionsProps) {
-  const [varient, setVarient] = useState<"outlined" | "filled" | undefined>(
-    "outlined"
-  );
+  const filterMap = useFilters();
+  const [state, setState] = useState(false);
 
   return (
     <Chip
       label={text}
-      variant={"filled"}
+      variant={!state ? "outlined" : "filled"}
       onDelete={() => {
-        setDisplay(false);
+        filterMap.updateFilters(text);
+        setState(filterMap.filterMap.get(text) || false);
       }}
       sx={{ width: "6rem" }}
     />
