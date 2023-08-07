@@ -7,36 +7,28 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import { useEffect, useState, useCallback } from "react";
+import { useState } from "react";
 import { useFilters } from "../../use/useFilters/useFilters";
-
-interface variants {
-  outlined: "outlined";
-  filled: "filled";
-}
 
 interface ChipActionsProps {
   text: string;
 }
 
-interface handleClickProps {
-  text: string;
-  filter: boolean | undefined;
-}
-
 function FilterGroup() {
   function ChipActions(text: ChipActionsProps) {
-    const filterMap = useFilters();
-    const [state, setState] = useState(false);
+    console.log(text);
+
+    const { updateFilter, getFilter } = useFilters();
+    const [chipState, setChipState] = useState(getFilter(text.text));
 
     return (
       <Chip
         label={text.text}
         onClick={() => {
-          filterMap.updateFilters(text.text);
-          setState(filterMap.filterMap.get(text.text) || false);
+          updateFilter(text.text);
+          setChipState(!chipState);
         }}
-        variant={!state ? "outlined" : "filled"}
+        variant={!chipState ? "outlined" : "filled"}
         sx={{ width: "5rem" }}
       />
     );
@@ -76,7 +68,7 @@ function FilterGroup() {
             alignItems={"center"}
           >
             <Grid item sx={{ flexGrow: 1 }}>
-              <ChipActions text="Italian" />
+              <ChipActions text={"Italian"} />
             </Grid>
             <Grid item sx={{ flexGrow: 1 }}>
               <ChipActions text="American" />

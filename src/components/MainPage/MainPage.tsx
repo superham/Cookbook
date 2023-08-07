@@ -15,15 +15,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Link from "@mui/material/Link";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Slide, useScrollTrigger } from "@mui/material";
-import { useState } from "react";
-import {
-  Search,
-  SearchAppBar,
-  SearchIconWrapper,
-  StyledInputBase,
-} from "../SearchAppBar/SearchAppBar";
-import SearchIcon from "@mui/icons-material/Search";
+import { SearchAppBar } from "../SearchAppBar/SearchAppBar";
 import Filters from "../Filters/Filters";
 
 function Copyright() {
@@ -53,12 +45,12 @@ const defaultTheme = createTheme({
 });
 
 export default function MainPage() {
-  const trigger = useScrollTrigger();
-
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
       <SearchAppBar />
+      <Filters />
+
       <main>
         {/* Hero unit */}
         <Box
@@ -82,7 +74,6 @@ export default function MainPage() {
               A collection of things that turned out well
             </Typography>
           </Container>
-          <Filters />
         </Box>
         <Container sx={{ py: 8 }} maxWidth="md">
           {/* End hero unit */}

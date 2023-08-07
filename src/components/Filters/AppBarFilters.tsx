@@ -1,17 +1,14 @@
 import { Card, Chip, Grid, Container } from "@mui/material";
 import { useState } from "react";
 import { useFilters } from "src/use/useFilters/useFilters";
+import { useFiltersType } from "../../types/useFiltersType";
 
 interface ChipActionsProps {
   text: string;
   setDisplay: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const handleDelete = () => {
-  console.info("You clicked the delete icon.");
-};
-function ChipActions({ text, setDisplay }: ChipActionsProps) {
-  const filterMap = useFilters();
+function ChipActions({ text, filterMap }: any) {
   const [state, setState] = useState(false);
 
   return (
@@ -35,19 +32,33 @@ export default function AppBarFilters() {
   return (
     <Container sx={{ width: "auto" }}>
       <Grid container spacing={2} sx={{ marginTop: 0, marginBottom: "0.5rem" }}>
-        <Grid item>
-          {display && <ChipActions text="Indian" setDisplay={setDisplay} />}
+        {/* <Grid item>
+          {display && (
+            <ChipActions
+              text="Indian"
+              filterMap={filterMap}
+              setDisplay={setDisplay}
+            />
+          )}
         </Grid>
         <Grid item>
           {displayLamb && (
-            <ChipActions text="Lamb" setDisplay={setDisplayLamb} />
+            <ChipActions
+              text="Lamb"
+              filterMap={filterMap}
+              setDisplay={setDisplayLamb}
+            />
           )}
         </Grid>
         <Grid item>
           {displaySpicy && (
-            <ChipActions text="Spicy" setDisplay={setDisplaySpicy} />
+            <ChipActions
+              text="Spicy"
+              filterMap={filterMap}
+              setDisplay={setDisplaySpicy}
+            />
           )}
-        </Grid>
+        </Grid> */}
       </Grid>
     </Container>
   );

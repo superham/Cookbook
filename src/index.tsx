@@ -3,10 +3,12 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import MainPage from "./components/MainPage/MainPage";
+import { FilterProvider } from "./context/filterContext";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+
 root.render(
   <React.StrictMode>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -14,7 +16,9 @@ root.render(
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <MainPage />
+    <FilterProvider>
+      <MainPage />
+    </FilterProvider>
   </React.StrictMode>
 );
 

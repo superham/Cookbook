@@ -1,5 +1,6 @@
 import { FilterDrama } from "@mui/icons-material";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useContext } from "react";
+import { FilterContext } from "src/context/filterContext";
 
 interface updateFiltersProps {
   type: string;
@@ -7,36 +8,21 @@ interface updateFiltersProps {
 }
 
 function useFilters() {
-  const [filterMap, setFilterMap] = useState(
-    new Map<string, boolean>([
-      ["Italian", false],
-      ["American", false],
-      ["Mexican", false],
-      ["German", false],
-      ["Chinese", false],
-      ["Beef", false],
-      ["Salmon", false],
-      ["Lamb", false],
-      ["Chicken", false],
-      ["Tofu", false],
-      ["Noodles", false],
-      ["Salty", false],
-      ["Umami", false],
-      ["Sweet", false],
-      ["Spicy", false],
-      ["Bitter", false],
-      ["Sour", false],
-    ])
-  );
+  //@ts-ignore
+  const { filterMap, setFilterMap } = useContext(FilterContext);
 
-  const updateFilters = (type: string) => {
+  function updateFilter(type: string) {
     let updatedMap = filterMap;
-    const currState = updatedMap.get(type);
-    updatedMap.set(type, !currState);
+    updatedMap.set(type, !updatedMap.get(type));
     setFilterMap(updatedMap);
-  };
+  }
 
-  return { filterMap, updateFilters };
+  function getFilter(type: string) {
+    console.log("getFilter");
+    return filterMap.get(type);
+  }
+
+  return { updateFilter, getFilter };
 }
 
 export { useFilters };
