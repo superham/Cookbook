@@ -49,12 +49,8 @@ const iconMapper = new Map<string, any>([
 
 function FilterGroup() {
   function ChipActions(text: ChipActionsProps) {
-    // const italyFlag = require("../../../content/flags/it.svg") as string;
-    console.log(text);
-
     const { updateFilter, getFilter } = useFilters();
     const [chipState, setChipState] = useState(getFilter(text.text));
-
     const img = iconMapper.get(text.text);
 
     return (
@@ -65,7 +61,7 @@ function FilterGroup() {
           setChipState(!chipState);
         }}
         variant={!chipState ? "outlined" : "filled"}
-        sx={{ width: "6rem" }}
+        sx={{ width: "7rem" }}
         icon={img}
       />
     );
@@ -75,7 +71,7 @@ function FilterGroup() {
     <Container
       maxWidth="md"
       sx={{
-        paddingTop: "1rem",
+        paddingTop: "4rem",
         borderRadius: "4px",
         marginTop: "1rem",
       }}
@@ -93,7 +89,7 @@ function FilterGroup() {
           elevation={3}
           sx={{ maxWidth: "30%", marginRight: "0.5rem", marginLeft: "0.5rem" }}
         >
-          <Typography variant="h5" textAlign={"center"}>
+          <Typography variant="h4" textAlign={"center"}>
             Cuisines
           </Typography>
           <Grid
@@ -130,7 +126,7 @@ function FilterGroup() {
           elevation={3}
           sx={{ maxWidth: "30%", marginRight: "0.5rem", marginLeft: "0.5rem" }}
         >
-          <Typography variant="h5" textAlign={"center"}>
+          <Typography variant="h4" textAlign={"center"}>
             Ingredients
           </Typography>
           <Grid
@@ -167,7 +163,7 @@ function FilterGroup() {
           elevation={3}
           sx={{ maxWidth: "30%", marginRight: "0.5rem", marginLeft: "0.5rem" }}
         >
-          <Typography variant="h5" textAlign={"center"}>
+          <Typography variant="h4" textAlign={"center"}>
             Flavors
           </Typography>
           <Grid

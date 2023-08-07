@@ -17,6 +17,9 @@ import Link from "@mui/material/Link";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { SearchAppBar } from "../SearchAppBar/SearchAppBar";
 import Filters from "../Filters/Filters";
+import chickenPic from "../../foodPics/chicken.jpg";
+import lambPic from "../../foodPics/lamb.jpg";
+import salmonPic from "../../foodPics/salmon.jpg";
 
 function Copyright() {
   return (
@@ -37,7 +40,7 @@ const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 const defaultTheme = createTheme({
   typography: {
     fontFamily: ["Cormorant Garamond", "serif"].join(","),
-    fontSize: 14,
+    fontSize: 16,
     fontWeightLight: 300,
     fontWeightRegular: 400,
     fontWeightMedium: 500,
@@ -62,7 +65,7 @@ export default function MainPage() {
         >
           <Container
             maxWidth="sm"
-            sx={{ paddingTop: "1rem" }}
+            // sx={{ paddingTop: "1rem" }}
             style={{ borderBottom: "1px solid #393939" }}
           >
             <Typography
@@ -75,10 +78,10 @@ export default function MainPage() {
             </Typography>
           </Container>
         </Box>
-        <Container sx={{ py: 8 }} maxWidth="md">
+        <Container sx={{ py: 4 }} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={4}>
-            {cards.map((card) => (
+            {/* {cards.map((card) => (
               <Grid item key={card} xs={12} sm={6} md={4}>
                 <Card
                   sx={{
@@ -110,7 +113,93 @@ export default function MainPage() {
                   </CardActions>
                 </Card>
               </Grid>
-            ))}
+            ))} */}
+            <Grid item key={"lamb"} xs={12} sm={6} md={4}>
+              <Card
+                sx={{
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <CardMedia
+                  component="div"
+                  sx={{
+                    // 16:9
+                    pt: "56.25%",
+                  }}
+                  image={lambPic}
+                />
+                <CardContent sx={{ flexGrow: 1 }}>
+                  <Typography gutterBottom variant="h5" component="h2">
+                    Roasted Rack of Lamb
+                  </Typography>
+                  <Typography>with Carrots and Lemon Quinoa</Typography>
+                </CardContent>
+                <CardActions>
+                  <Button size="small">View</Button>
+                  <Button size="small">Edit</Button>
+                </CardActions>
+              </Card>
+            </Grid>
+            <Grid item key={"chicken"} xs={12} sm={6} md={4}>
+              <Card
+                sx={{
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <CardMedia
+                  component="div"
+                  sx={{
+                    // 16:9
+                    pt: "56.25%",
+                  }}
+                  image={chickenPic}
+                />
+                <CardContent sx={{ flexGrow: 1 }}>
+                  <Typography gutterBottom variant="h5" component="h2">
+                    Smoked Paprika Chicken{" "}
+                  </Typography>
+                  <Typography>with yellow rice and bread</Typography>
+                </CardContent>
+                <CardActions>
+                  <Button size="small">View</Button>
+                  <Button size="small">Edit</Button>
+                </CardActions>
+              </Card>
+            </Grid>
+            <Grid item key={"salmon"} xs={12} sm={6} md={4}>
+              <Card
+                sx={{
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <CardMedia
+                  component="div"
+                  sx={{
+                    // 16:9
+                    pt: "56.25%",
+                  }}
+                  image={salmonPic}
+                />
+                <CardContent sx={{ flexGrow: 1 }}>
+                  <Typography gutterBottom variant="h5" component="h2">
+                    Herb Crusted Grilled Chicken Breast
+                  </Typography>
+                  <Typography>
+                    with Vegetable Medley and Corn on the Cob
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <Button size="small">View</Button>
+                  <Button size="small">Edit</Button>
+                </CardActions>
+              </Card>
+            </Grid>
           </Grid>
         </Container>
       </main>
