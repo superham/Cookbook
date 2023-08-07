@@ -20,6 +20,7 @@ const FilterProvider: React.FC<Props> = ({ children }) => {
       ["Mexican", false],
       ["German", false],
       ["Chinese", false],
+      ["Indian", false],
       ["Beef", false],
       ["Salmon", false],
       ["Lamb", false],

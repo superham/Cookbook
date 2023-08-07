@@ -12,52 +12,50 @@ import { useState } from "react";
 import { useFilters } from "../../use/useFilters/useFilters";
 import { SvgIcon, Icon } from "@mui/material";
 // import { makeStyles } from "@mui/styles";
+// import * as italyFlag from "../../content/flags/it.svg";
+import {
+  italyFlag,
+  mexicanFlag,
+  usFlag,
+  germanFlag,
+  chineseFlag,
+  indiaFlag,
+} from "../flags/flags";
 
 interface ChipActionsProps {
   text: string;
 }
 
+const iconMapper = new Map<string, any>([
+  ["Italian", italyFlag],
+  ["American", usFlag],
+  ["Mexican", mexicanFlag],
+  ["German", germanFlag],
+  ["Chinese", chineseFlag],
+  ["Indian", indiaFlag],
+  ["Beef", false],
+  ["Salmon", false],
+  ["Lamb", false],
+  ["Chicken", false],
+  ["Tofu", false],
+  ["Noodles", false],
+  ["Salty", false],
+  ["Umami", false],
+  ["Sweet", false],
+  ["Spicy", false],
+  ["Bitter", false],
+  ["Sour", false],
+]);
+
 function FilterGroup() {
   function ChipActions(text: ChipActionsProps) {
+    // const italyFlag = require("../../../content/flags/it.svg") as string;
     console.log(text);
 
     const { updateFilter, getFilter } = useFilters();
     const [chipState, setChipState] = useState(getFilter(text.text));
 
-    <SvgIcon sx={{ display: "flex", height: "100%", width: "100%" }}>
-      <svg
-      // sx={{ textAlign: "center" }}
-      />
-    </SvgIcon>;
-
-    // const FlagIcon = createSvgIcon(
-    //   <svg
-    //     xmlns="../../../content/images/germany.png"
-    //     fill="none"
-    //     viewBox="0 0 24 24"
-    //     strokeWidth={1.5}
-    //     stroke="currentColor"
-    //     fontSize="small"
-    //   >
-    //     <path
-    //       strokeLinecap="round"
-    //       strokeLinejoin="round"
-    //       d="M12 4.5v15m7.5-7.5h-15"
-    //     />
-    //   </svg>,
-    //   "Flag"
-    // );
-
-    // const FlagIcon = createSvgIcon(
-    //   <img src="flags/it.svg" width="96" />,
-    //   "Flag"
-    // );
-
-    const FlagIcon = (
-      <Icon>
-        <img src="flags/it.svg" alt="Flag of Italy" />
-      </Icon>
-    );
+    const img = iconMapper.get(text.text);
 
     return (
       <Chip
@@ -68,7 +66,7 @@ function FilterGroup() {
         }}
         variant={!chipState ? "outlined" : "filled"}
         sx={{ width: "6rem" }}
-        icon={<FlagIcon />}
+        icon={img}
       />
     );
   }
