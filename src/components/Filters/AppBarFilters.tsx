@@ -8,16 +8,17 @@ interface ChipActionsProps {
   setDisplay: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function ChipActions({ text, filterMap }: any) {
-  const [state, setState] = useState(false);
+function ChipActions({ text }: any) {
+  const { updateFilter, getFilter } = useFilters();
+  const [chipState, setChipState] = useState(getFilter(text));
 
   return (
     <Chip
       label={text}
-      variant={!state ? "outlined" : "filled"}
+      variant={!chipState ? "outlined" : "filled"}
       onDelete={() => {
-        filterMap.updateFilters(text);
-        setState(filterMap.filterMap.get(text) || false);
+        updateFilter(text);
+        setChipState(!chipState);
       }}
       sx={{ width: "6rem" }}
     />
@@ -25,40 +26,27 @@ function ChipActions({ text, filterMap }: any) {
 }
 
 export default function AppBarFilters() {
+  const { updateFilter, getFilter } = useFilters();
+
   const [display, setDisplay] = useState(true);
   const [displayLamb, setDisplayLamb] = useState(true);
   const [displaySpicy, setDisplaySpicy] = useState(true);
 
   return (
+    // <Container sx={{ width: "auto" }}>
+    //   {/* // figure out how to gen via filters */}
+    //   <Grid container spacing={2} sx={{ marginTop: 0, marginBottom: "0.5rem" }}>
+    //     <Grid item>{getFilter("Indian") && <ChipActions text="Indian" />}</Grid>
+    //     <Grid item>{getFilter("Lamb") && <ChipActions text="Lamb" />}</Grid>
+    //     <Grid item>{getFilter("Spicy") && <ChipActions text="Spicy" />}</Grid>
+    //   </Grid>
+    // </Container>
     <Container sx={{ width: "auto" }}>
+      {/* // figure out how to gen via filters */}
       <Grid container spacing={2} sx={{ marginTop: 0, marginBottom: "0.5rem" }}>
-        {/* <Grid item>
-          {display && (
-            <ChipActions
-              text="Indian"
-              filterMap={filterMap}
-              setDisplay={setDisplay}
-            />
-          )}
-        </Grid>
-        <Grid item>
-          {displayLamb && (
-            <ChipActions
-              text="Lamb"
-              filterMap={filterMap}
-              setDisplay={setDisplayLamb}
-            />
-          )}
-        </Grid>
-        <Grid item>
-          {displaySpicy && (
-            <ChipActions
-              text="Spicy"
-              filterMap={filterMap}
-              setDisplay={setDisplaySpicy}
-            />
-          )}
-        </Grid> */}
+        <Grid item>{<ChipActions text="Indian" />}</Grid>
+        <Grid item>{<ChipActions text="Lamb" />}</Grid>
+        <Grid item>{<ChipActions text="Spicy" />}</Grid>
       </Grid>
     </Container>
   );

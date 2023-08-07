@@ -53,7 +53,7 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export function SearchAppBar() {
   return (
-    <AppBar>
+    <AppBar position="sticky">
       <Toolbar>
         <Typography
           variant="h3"
