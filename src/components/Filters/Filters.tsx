@@ -8,9 +8,7 @@ import {
   Typography,
   createSvgIcon,
 } from "@mui/material";
-import { useState } from "react";
 import { useFilters } from "../../use/useFilters/useFilters";
-import { SvgIcon, Icon } from "@mui/material";
 // import { makeStyles } from "@mui/styles";
 // import * as italyFlag from "../../content/flags/it.svg";
 import {
@@ -21,6 +19,8 @@ import {
   chineseFlag,
   indiaFlag,
 } from "../flags/flags";
+import { FilterContext } from "src/context/filterContext";
+import React, { useState, useEffect, useCallback, useContext } from "react";
 
 interface ChipActionsProps {
   text: string;
@@ -48,8 +48,8 @@ const iconMapper = new Map<string, any>([
 ]);
 
 function FilterGroup() {
+  const { updateFilter, getFilter, groupFull } = useFilters();
   function ChipActions(text: ChipActionsProps) {
-    const { updateFilter, getFilter } = useFilters();
     const [chipState, setChipState] = useState(getFilter(text.text));
     const img = iconMapper.get(text.text);
 
@@ -57,8 +57,10 @@ function FilterGroup() {
       <Chip
         label={text.text}
         onClick={() => {
-          updateFilter(text.text);
-          setChipState(!chipState);
+          if (!groupFull(text.text) || getFilter(text.text)) {
+            updateFilter(text.text);
+            setChipState(!chipState);
+          }
         }}
         variant={!chipState ? "outlined" : "filled"}
         sx={{ width: "7rem" }}
@@ -119,6 +121,15 @@ function FilterGroup() {
               <ChipActions text="Chinese" />
             </Grid>
           </Grid>
+          {groupFull("Italian") && (
+            <Typography
+              variant="subtitle2"
+              color="red"
+              sx={{ py: ".5rem", textAlign: "center" }}
+            >
+              Only 1 filter per category.
+            </Typography>
+          )}
         </Paper>
 
         {/* Ingredients */}

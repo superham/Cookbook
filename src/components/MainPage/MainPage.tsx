@@ -20,7 +20,7 @@ import Filters from "../Filters/Filters";
 import chickenPic from "../../foodPics/chicken.jpg";
 import lambPic from "../../foodPics/lamb.jpg";
 import salmonPic from "../../foodPics/salmon.jpg";
-
+import { useFilters } from "../../use/useFilters/useFilters";
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
@@ -48,6 +48,7 @@ const defaultTheme = createTheme({
 });
 
 export default function MainPage() {
+  const { updateFilter, getFilter, groupFull } = useFilters();
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
