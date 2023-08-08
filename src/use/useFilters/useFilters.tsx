@@ -36,26 +36,20 @@ function useFilters() {
     setFilterMap(updatedMap);
 
     if (returnCuisFilter()) {
-      setCuisWarn(true);
       setCuisFilterActive(true);
     } else {
-      setCuisWarn(false);
       setCuisFilterActive(false);
     }
 
     if (returnIngFilter()) {
-      setIngWarn(true);
       setIngFilterActive(true);
     } else {
-      setIngWarn(false);
       setIngFilterActive(false);
     }
 
     if (returnFlavorFilter()) {
-      setFlavorWarn(true);
       setFlavorFilterActive(true);
     } else {
-      setFlavorWarn(false);
       setFlavorFilterActive(false);
     }
   }
@@ -133,6 +127,35 @@ function useFilters() {
     }
 
     return groupStatus;
+  }
+
+  function whatGroup(type: string) {
+    switch (type) {
+      case "Italian":
+      case "Mexican":
+      case "German":
+      case "American":
+      case "Indian":
+      case "Chinese":
+        return "Cuisine";
+        break;
+      case "Beef":
+      case "Noodles":
+      case "Tofu":
+      case "Salmon":
+      case "Lamb":
+      case "Chicken":
+        return "Ingredient";
+        break;
+      case "Salty":
+      case "Sweet":
+      case "Bitter":
+      case "Umami":
+      case "Spicy":
+      case "Sour":
+        return "Flavor";
+        break;
+    }
   }
 
   // returns
@@ -217,6 +240,34 @@ function useFilters() {
     }
   }
 
+  function setWarning(type: string, active: boolean) {
+    const group = whatGroup(type);
+
+    switch (group) {
+      case "Cuisine":
+        if (active) {
+          setCuisWarn(true);
+        } else {
+          setCuisWarn(false);
+        }
+        break;
+      case "Ingredient":
+        if (active) {
+          setIngWarn(true);
+        } else {
+          setIngWarn(false);
+        }
+        break;
+      case "Flavor":
+        if (active) {
+          setFlavorWarn(true);
+        } else {
+          setFlavorWarn(false);
+        }
+        break;
+    }
+  }
+
   return {
     updateFilter,
     getFilter,
@@ -224,6 +275,8 @@ function useFilters() {
     returnCuisFilter,
     returnIngFilter,
     returnFlavorFilter,
+    whatGroup,
+    setWarning,
   };
 }
 

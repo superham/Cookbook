@@ -51,7 +51,7 @@ function FilterGroup() {
   //@ts-ignore
   const { cuisWarn, ingWarn, flavorWarn } = useContext(FilterContext);
 
-  const { updateFilter, getFilter, groupFull } = useFilters();
+  const { updateFilter, getFilter, groupFull, setWarning } = useFilters();
   function ChipActions(text: ChipActionsProps) {
     const [chipState, setChipState] = useState(getFilter(text.text));
     const img = iconMapper.get(text.text);
@@ -60,7 +60,11 @@ function FilterGroup() {
       <Chip
         label={text.text}
         onClick={() => {
+          if (groupFull(text.text)) {
+            setWarning(text.text, true);
+          }
           if (!groupFull(text.text) || getFilter(text.text)) {
+            setWarning(text.text, false);
             updateFilter(text.text);
             setChipState(!chipState);
           }
