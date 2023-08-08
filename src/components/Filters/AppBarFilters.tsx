@@ -14,6 +14,7 @@ function ChipActions({ text }: any) {
 
   return (
     <Chip
+      key="i"
       label={text}
       variant={!chipState ? "outlined" : "filled"}
       onDelete={() => {
@@ -26,27 +27,41 @@ function ChipActions({ text }: any) {
 }
 
 export default function AppBarFilters() {
-  const { updateFilter, getFilter } = useFilters();
+  const {
+    updateFilter,
+    getFilter,
+    returnCuisFilter,
+    returnIngFilter,
+    returnFlavorFilter,
+  } = useFilters();
 
-  const [display, setDisplay] = useState(true);
-  const [displayLamb, setDisplayLamb] = useState(true);
-  const [displaySpicy, setDisplaySpicy] = useState(true);
+  const [cuisFilterActive, setCuisFilterActive] = useState(
+    Boolean(returnCuisFilter())
+  );
 
+  const [ingFilterActive, setIngFilterActive] = useState(
+    Boolean(returnCuisFilter())
+  );
+
+  const [flavorFilterActive, setFlavorFilterActive] = useState(
+    Boolean(returnCuisFilter())
+  );
+
+  console.log("cuisFilter: ");
+  console.log(returnCuisFilter());
   return (
-    // <Container sx={{ width: "auto" }}>
-    //   {/* // figure out how to gen via filters */}
-    //   <Grid container spacing={2} sx={{ marginTop: 0, marginBottom: "0.5rem" }}>
-    //     <Grid item>{getFilter("Indian") && <ChipActions text="Indian" />}</Grid>
-    //     <Grid item>{getFilter("Lamb") && <ChipActions text="Lamb" />}</Grid>
-    //     <Grid item>{getFilter("Spicy") && <ChipActions text="Spicy" />}</Grid>
-    //   </Grid>
-    // </Container>
     <Container sx={{ width: "auto" }}>
       {/* // figure out how to gen via filters */}
       <Grid container spacing={2} sx={{ marginTop: 0, marginBottom: "0.5rem" }}>
-        <Grid item>{<ChipActions text="Indian" />}</Grid>
-        <Grid item>{<ChipActions text="Lamb" />}</Grid>
-        <Grid item>{<ChipActions text="Spicy" />}</Grid>
+        {cuisFilterActive && (
+          <Grid item>{<ChipActions text={returnCuisFilter} />}</Grid>
+        )}
+        {ingFilterActive && (
+          <Grid item>{<ChipActions text={returnIngFilter} />}</Grid>
+        )}
+        {flavorFilterActive && (
+          <Grid item>{<ChipActions text={returnFlavorFilter} />}</Grid>
+        )}
       </Grid>
     </Container>
   );

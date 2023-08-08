@@ -21,6 +21,7 @@ import chickenPic from "../../foodPics/chicken.jpg";
 import lambPic from "../../foodPics/lamb.jpg";
 import salmonPic from "../../foodPics/salmon.jpg";
 import { useFilters } from "../../use/useFilters/useFilters";
+import { useState } from "react";
 function Copyright() {
   return (
     <Typography variant="body2" color="text.secondary" align="center">
@@ -48,7 +49,14 @@ const defaultTheme = createTheme({
 });
 
 export default function MainPage() {
-  const { updateFilter, getFilter, groupFull } = useFilters();
+  const { returnCuisFilter } = useFilters();
+
+  const [cuisFilterActive, setCuisFilterActive] = useState(false);
+
+  const [ingFilterActive, setIngFilterActive] = useState(false);
+
+  const [flavorFilterActive, setFlavorFilterActive] = useState(false);
+
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />

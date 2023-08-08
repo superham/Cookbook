@@ -48,6 +48,9 @@ const iconMapper = new Map<string, any>([
 ]);
 
 function FilterGroup() {
+  //@ts-ignore
+  const { cuisWarn, ingWarn, flavorWarn } = useContext(FilterContext);
+
   const { updateFilter, getFilter, groupFull } = useFilters();
   function ChipActions(text: ChipActionsProps) {
     const [chipState, setChipState] = useState(getFilter(text.text));
@@ -63,8 +66,12 @@ function FilterGroup() {
           }
         }}
         variant={!chipState ? "outlined" : "filled"}
-        sx={{ width: "7rem" }}
-        icon={img}
+        sx={{
+          width: "7rem",
+          fontSize: "18px",
+          fontWeight: 400,
+        }}
+        // icon={img}
       />
     );
   }
@@ -121,13 +128,13 @@ function FilterGroup() {
               <ChipActions text="Chinese" />
             </Grid>
           </Grid>
-          {groupFull("Italian") && (
+          {cuisWarn && (
             <Typography
               variant="subtitle2"
               color="red"
               sx={{ py: ".5rem", textAlign: "center" }}
             >
-              Only 1 filter per category.
+              Max 1 filter per category
             </Typography>
           )}
         </Paper>
@@ -167,6 +174,15 @@ function FilterGroup() {
               <ChipActions text="Chicken" />
             </Grid>
           </Grid>
+          {ingWarn && (
+            <Typography
+              variant="subtitle2"
+              color="red"
+              sx={{ py: ".5rem", textAlign: "center" }}
+            >
+              Max 1 filter per category
+            </Typography>
+          )}
         </Paper>
 
         {/* Flavors */}
@@ -204,6 +220,15 @@ function FilterGroup() {
               <ChipActions text="Sour" />
             </Grid>
           </Grid>
+          {flavorWarn && (
+            <Typography
+              variant="subtitle2"
+              color="red"
+              sx={{ py: ".5rem", textAlign: "center" }}
+            >
+              Max 1 filter per category
+            </Typography>
+          )}
         </Paper>
       </Grid>
     </Container>

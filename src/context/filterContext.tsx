@@ -6,6 +6,12 @@ type Props = {
 export interface filterContextType {
   filterMap: Map<string, boolean>;
   setFilterMap: React.Dispatch<React.SetStateAction<Map<string, boolean>>>;
+  cuisWarn: boolean;
+  setCuisWarn: React.Dispatch<React.SetStateAction<boolean>>;
+  ingWarn: boolean;
+  setIngWarn: React.Dispatch<React.SetStateAction<boolean>>;
+  flavorWarn: boolean;
+  setFlavorWarn: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const FilterContext = React.createContext<filterContextType | null>(
@@ -36,8 +42,25 @@ const FilterProvider: React.FC<Props> = ({ children }) => {
     ])
   );
 
+  const [cuisWarn, setCuisWarn] = useState(false);
+  const [ingWarn, setIngWarn] = useState(false);
+  const [flavorWarn, setFlavorWarn] = useState(false);
+
+  // show warning
+
   return (
-    <FilterContext.Provider value={{ filterMap, setFilterMap }}>
+    <FilterContext.Provider
+      value={{
+        filterMap,
+        setFilterMap,
+        cuisWarn,
+        setCuisWarn,
+        ingWarn,
+        setIngWarn,
+        flavorWarn,
+        setFlavorWarn,
+      }}
+    >
       {children}
     </FilterContext.Provider>
   );

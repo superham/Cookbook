@@ -9,7 +9,8 @@ interface updateFiltersProps {
 
 function useFilters() {
   //@ts-ignore
-  const { filterMap, setFilterMap } = useContext(FilterContext);
+  const { filterMap, setFilterMap, setCuisWarn, setIngWarn, setFlavorWarn } =
+    useContext(FilterContext);
 
   // verify that only 1 of each kind of filter is applied at any one time
 
@@ -17,6 +18,24 @@ function useFilters() {
     let updatedMap = filterMap;
     updatedMap.set(type, !updatedMap.get(type));
     setFilterMap(updatedMap);
+
+    if (returnCuisFilter()) {
+      setCuisWarn(true);
+    } else {
+      setCuisWarn(false);
+    }
+
+    if (returnIngFilter()) {
+      setIngWarn(true);
+    } else {
+      setIngWarn(false);
+    }
+
+    if (returnFlavorFilter()) {
+      setFlavorWarn(true);
+    } else {
+      setFlavorWarn(false);
+    }
   }
 
   function getFilter(type: string) {
@@ -93,7 +112,97 @@ function useFilters() {
 
     return groupStatus;
   }
-  return { updateFilter, getFilter, groupFull };
+
+  // returns
+  function returnCuisFilter() {
+    // loop over each key return the one that is true
+    if (getFilter("Italian")) {
+      return "Italian";
+    }
+
+    if (getFilter("Mexican")) {
+      return "Mexican";
+    }
+
+    if (getFilter("German")) {
+      return "German";
+    }
+
+    if (getFilter("American")) {
+      return "American";
+    }
+
+    if (getFilter("Chinese")) {
+      return "Chinese";
+    }
+
+    if (getFilter("Indian")) {
+      return "Indian";
+    }
+  }
+
+  function returnIngFilter() {
+    // loop over each key return the one that is true
+    if (getFilter("Beef")) {
+      return "Beef";
+    }
+
+    if (getFilter("Salmon")) {
+      return "Salmon";
+    }
+
+    if (getFilter("Lamb")) {
+      return "Lamb";
+    }
+
+    if (getFilter("Tofu")) {
+      return "Tofu";
+    }
+
+    if (getFilter("Noodles")) {
+      return "Noodles";
+    }
+
+    if (getFilter("Chicken")) {
+      return "Chicken";
+    }
+  }
+
+  function returnFlavorFilter() {
+    // loop over each key return the one that is true
+    if (getFilter("Salty")) {
+      return "Salty";
+    }
+
+    if (getFilter("Umami")) {
+      return "Umami";
+    }
+
+    if (getFilter("Sweet")) {
+      return "Sweet";
+    }
+
+    if (getFilter("Spicy")) {
+      return "Spicy";
+    }
+
+    if (getFilter("Bitter")) {
+      return "Bitter";
+    }
+
+    if (getFilter("Sour")) {
+      return "Sour";
+    }
+  }
+
+  return {
+    updateFilter,
+    getFilter,
+    groupFull,
+    returnCuisFilter,
+    returnIngFilter,
+    returnFlavorFilter,
+  };
 }
 
 export { useFilters };
