@@ -12,6 +12,12 @@ export interface filterContextType {
   setIngWarn: React.Dispatch<React.SetStateAction<boolean>>;
   flavorWarn: boolean;
   setFlavorWarn: React.Dispatch<React.SetStateAction<boolean>>;
+  cuisFilterActive: boolean;
+  setCuisFilterActive: React.Dispatch<React.SetStateAction<boolean>>;
+  ingFilterActive: boolean;
+  setIngFilterActive: React.Dispatch<React.SetStateAction<boolean>>;
+  flavorFilterActive: boolean;
+  setFlavorFilterActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const FilterContext = React.createContext<filterContextType | null>(
@@ -42,9 +48,15 @@ const FilterProvider: React.FC<Props> = ({ children }) => {
     ])
   );
 
+  // warning for max 1 filter
   const [cuisWarn, setCuisWarn] = useState(false);
   const [ingWarn, setIngWarn] = useState(false);
   const [flavorWarn, setFlavorWarn] = useState(false);
+
+  // true/false filter group active
+  const [cuisFilterActive, setCuisFilterActive] = useState(false);
+  const [ingFilterActive, setIngFilterActive] = useState(false);
+  const [flavorFilterActive, setFlavorFilterActive] = useState(false);
 
   // show warning
 
@@ -59,6 +71,12 @@ const FilterProvider: React.FC<Props> = ({ children }) => {
         setIngWarn,
         flavorWarn,
         setFlavorWarn,
+        cuisFilterActive,
+        setCuisFilterActive,
+        ingFilterActive,
+        setIngFilterActive,
+        flavorFilterActive,
+        setFlavorFilterActive,
       }}
     >
       {children}

@@ -1,7 +1,8 @@
 import { Card, Chip, Grid, Container } from "@mui/material";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useFilters } from "src/use/useFilters/useFilters";
 import { useFiltersType } from "../../types/useFiltersType";
+import { FilterContext } from "src/context/filterContext";
 
 interface ChipActionsProps {
   text: string;
@@ -21,7 +22,11 @@ function ChipActions({ text }: any) {
         updateFilter(text);
         setChipState(!chipState);
       }}
-      sx={{ width: "6rem" }}
+      sx={{
+        width: "7rem",
+        fontSize: "18px",
+        fontWeight: 400,
+      }}
     />
   );
 }
@@ -34,18 +39,9 @@ export default function AppBarFilters() {
     returnIngFilter,
     returnFlavorFilter,
   } = useFilters();
-
-  const [cuisFilterActive, setCuisFilterActive] = useState(
-    Boolean(returnCuisFilter())
-  );
-
-  const [ingFilterActive, setIngFilterActive] = useState(
-    Boolean(returnCuisFilter())
-  );
-
-  const [flavorFilterActive, setFlavorFilterActive] = useState(
-    Boolean(returnCuisFilter())
-  );
+  //@ts-ignore
+  const { cuisFilterActive, ingFilterActive, flavorFilterActive } =
+    useContext(FilterContext);
 
   console.log("cuisFilter: ");
   console.log(returnCuisFilter());
@@ -54,14 +50,17 @@ export default function AppBarFilters() {
       {/* // figure out how to gen via filters */}
       <Grid container spacing={2} sx={{ marginTop: 0, marginBottom: "0.5rem" }}>
         {cuisFilterActive && (
-          <Grid item>{<ChipActions text={returnCuisFilter} />}</Grid>
+          <Grid item>{<ChipActions text={returnCuisFilter()} />}</Grid>
         )}
         {ingFilterActive && (
-          <Grid item>{<ChipActions text={returnIngFilter} />}</Grid>
+          <Grid item>{<ChipActions text={returnIngFilter()} />}</Grid>
         )}
         {flavorFilterActive && (
-          <Grid item>{<ChipActions text={returnFlavorFilter} />}</Grid>
+          <Grid item>{<ChipActions text={returnFlavorFilter()} />}</Grid>
         )}
+        {/* {true && <Grid item>{<ChipActions text={returnCuisFilter} />}</Grid>}
+        {true && <Grid item>{<ChipActions text={returnIngFilter} />}</Grid>}
+        {true && <Grid item>{<ChipActions text={returnFlavorFilter} />}</Grid>} */}
       </Grid>
     </Container>
   );

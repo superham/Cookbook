@@ -9,8 +9,24 @@ interface updateFiltersProps {
 
 function useFilters() {
   //@ts-ignore
-  const { filterMap, setFilterMap, setCuisWarn, setIngWarn, setFlavorWarn } =
-    useContext(FilterContext);
+  const {
+    //@ts-ignore
+    filterMap,
+    //@ts-ignore
+    setFilterMap,
+    //@ts-ignore
+    setCuisWarn,
+    //@ts-ignore
+    setIngWarn,
+    //@ts-ignore
+    setFlavorWarn,
+    //@ts-ignore
+    setCuisFilterActive,
+    //@ts-ignore
+    setIngFilterActive,
+    //@ts-ignore
+    setFlavorFilterActive,
+  } = useContext(FilterContext);
 
   // verify that only 1 of each kind of filter is applied at any one time
 
@@ -21,20 +37,26 @@ function useFilters() {
 
     if (returnCuisFilter()) {
       setCuisWarn(true);
+      setCuisFilterActive(true);
     } else {
       setCuisWarn(false);
+      setCuisFilterActive(false);
     }
 
     if (returnIngFilter()) {
       setIngWarn(true);
+      setIngFilterActive(true);
     } else {
       setIngWarn(false);
+      setIngFilterActive(false);
     }
 
     if (returnFlavorFilter()) {
       setFlavorWarn(true);
+      setFlavorFilterActive(true);
     } else {
       setFlavorWarn(false);
+      setFlavorFilterActive(false);
     }
   }
 
