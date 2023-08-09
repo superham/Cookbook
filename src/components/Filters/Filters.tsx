@@ -24,6 +24,7 @@ import React, { useState, useEffect, useCallback, useContext } from "react";
 
 interface ChipActionsProps {
   text: string;
+  color?: string;
 }
 
 const iconMapper = new Map<string, any>([
@@ -52,20 +53,20 @@ function FilterGroup() {
   const { cuisWarn, ingWarn, flavorWarn } = useContext(FilterContext);
 
   const { updateFilter, getFilter, groupFull, setWarning } = useFilters();
-  function ChipActions(text: ChipActionsProps) {
-    const [chipState, setChipState] = useState(getFilter(text.text));
-    const img = iconMapper.get(text.text);
+  function ChipActions({ text, color }: ChipActionsProps) {
+    const [chipState, setChipState] = useState(getFilter(text));
+    const img = iconMapper.get(text);
 
     return (
       <Chip
-        label={text.text}
+        label={text}
         onClick={() => {
-          if (groupFull(text.text)) {
-            setWarning(text.text, true);
+          if (groupFull(text)) {
+            setWarning(text, true);
           }
-          if (!groupFull(text.text) || getFilter(text.text)) {
-            setWarning(text.text, false);
-            updateFilter(text.text);
+          if (!groupFull(text) || getFilter(text)) {
+            setWarning(text, false);
+            updateFilter(text);
             setChipState(!chipState);
           }
         }}
@@ -75,6 +76,7 @@ function FilterGroup() {
           fontSize: "18px",
           fontWeight: 400,
         }}
+        // color="primary"
         // icon={img}
       />
     );
@@ -86,7 +88,7 @@ function FilterGroup() {
       sx={{
         paddingTop: "4rem",
         borderRadius: "4px",
-        marginTop: "1rem",
+        marginTop: ".5rem",
       }}
     >
       <Grid
@@ -100,7 +102,12 @@ function FilterGroup() {
         {/* Cuisines */}
         <Paper
           elevation={3}
-          sx={{ maxWidth: "30%", marginRight: "0.5rem", marginLeft: "0.5rem" }}
+          sx={{
+            maxWidth: "30%",
+            marginRight: "0.5rem",
+            marginLeft: "0.5rem",
+            minWidth: "200px",
+          }}
         >
           <Typography variant="h4" textAlign={"center"}>
             Cuisines
@@ -112,9 +119,10 @@ function FilterGroup() {
             columns={2}
             padding={"0.5rem"}
             alignItems={"center"}
+            sx={{ textAlign: "center" }}
           >
             <Grid item sx={{ flexGrow: 1 }}>
-              <ChipActions text={"Italian"} />
+              <ChipActions text={"Italian"} color="blue" />
             </Grid>
             <Grid item sx={{ flexGrow: 1 }}>
               <ChipActions text="American" />
@@ -146,7 +154,12 @@ function FilterGroup() {
         {/* Ingredients */}
         <Paper
           elevation={3}
-          sx={{ maxWidth: "30%", marginRight: "0.5rem", marginLeft: "0.5rem" }}
+          sx={{
+            maxWidth: "30%",
+            marginRight: "0.5rem",
+            marginLeft: "0.5rem",
+            minWidth: "200px",
+          }}
         >
           <Typography variant="h4" textAlign={"center"}>
             Ingredients
@@ -158,6 +171,7 @@ function FilterGroup() {
             columns={2}
             padding={"0.5rem"}
             alignItems={"center"}
+            sx={{ textAlign: "center" }}
           >
             <Grid item sx={{ flexGrow: 1 }}>
               <ChipActions text="Beef" />
@@ -192,7 +206,12 @@ function FilterGroup() {
         {/* Flavors */}
         <Paper
           elevation={3}
-          sx={{ maxWidth: "30%", marginRight: "0.5rem", marginLeft: "0.5rem" }}
+          sx={{
+            maxWidth: "30%",
+            marginRight: "0.5rem",
+            marginLeft: "0.5rem",
+            minWidth: "200px",
+          }}
         >
           <Typography variant="h4" textAlign={"center"}>
             Flavors
@@ -204,6 +223,7 @@ function FilterGroup() {
             columns={2}
             padding={"0.5rem"}
             alignItems={"center"}
+            sx={{ textAlign: "center", marginBottom: "1rem" }}
           >
             <Grid item sx={{ flexGrow: 1 }}>
               <ChipActions text="Salty" />
@@ -228,7 +248,7 @@ function FilterGroup() {
             <Typography
               variant="subtitle2"
               color="red"
-              sx={{ py: ".5rem", textAlign: "center" }}
+              sx={{ textAlign: "center" }}
             >
               Max 1 filter per category
             </Typography>

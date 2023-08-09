@@ -49,14 +49,6 @@ const defaultTheme = createTheme({
 });
 
 export default function MainPage() {
-  const { returnCuisFilter } = useFilters();
-
-  const [cuisFilterActive, setCuisFilterActive] = useState(false);
-
-  const [ingFilterActive, setIngFilterActive] = useState(false);
-
-  const [flavorFilterActive, setFlavorFilterActive] = useState(false);
-
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
@@ -68,8 +60,7 @@ export default function MainPage() {
         <Box
           sx={{
             bgcolor: "background.paper",
-            pt: 8,
-            pb: 6,
+            py: 4,
           }}
         >
           <Container

@@ -10,7 +10,7 @@ interface ChipActionsProps {
 }
 
 function ChipActions({ text }: any) {
-  const { updateFilter, getFilter } = useFilters();
+  const { updateFilter, getFilter, setWarning } = useFilters();
   const [chipState, setChipState] = useState(getFilter(text));
 
   return (
@@ -19,26 +19,23 @@ function ChipActions({ text }: any) {
       label={text}
       variant={!chipState ? "outlined" : "filled"}
       onDelete={() => {
+        setWarning(text, false);
         updateFilter(text);
         setChipState(!chipState);
       }}
       sx={{
-        width: "7rem",
+        width: "8rem",
         fontSize: "18px",
         fontWeight: 400,
       }}
+      // color="error"
     />
   );
 }
 
 export default function AppBarFilters() {
-  const {
-    updateFilter,
-    getFilter,
-    returnCuisFilter,
-    returnIngFilter,
-    returnFlavorFilter,
-  } = useFilters();
+  const { returnCuisFilter, returnIngFilter, returnFlavorFilter } =
+    useFilters();
   //@ts-ignore
   const { cuisFilterActive, ingFilterActive, flavorFilterActive } =
     useContext(FilterContext);
@@ -58,9 +55,6 @@ export default function AppBarFilters() {
         {flavorFilterActive && (
           <Grid item>{<ChipActions text={returnFlavorFilter()} />}</Grid>
         )}
-        {/* {true && <Grid item>{<ChipActions text={returnCuisFilter} />}</Grid>}
-        {true && <Grid item>{<ChipActions text={returnIngFilter} />}</Grid>}
-        {true && <Grid item>{<ChipActions text={returnFlavorFilter} />}</Grid>} */}
       </Grid>
     </Container>
   );
