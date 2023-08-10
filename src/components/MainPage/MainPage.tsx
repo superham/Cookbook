@@ -49,12 +49,7 @@ export default function MainPage() {
 
         <main>
           {/* Hero unit */}
-          <Box
-            sx={{
-              bgcolor: "background.paper",
-              py: 4,
-            }}
-          >
+          <Box>
             <Container
               maxWidth="sm"
               // sx={{ paddingTop: "1rem" }}
