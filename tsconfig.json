@@ -18,7 +18,7 @@
     "baseUrl": "./",
     "paths": {
       "@components/*": ["./src/components/*"],
-      "@content/*": ["./content/*"]
+      "@content/*": ["./src/content/*"]
     }
   },
   "include": ["src", "./**/*.ts", "./**/*.tsx", "src/custom.d.ts"]

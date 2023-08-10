@@ -4,6 +4,8 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import MainPage from "./components/MainPage/MainPage";
 import { FilterProvider } from "./context/filterContext";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import FullPage from "../src/components/FullPage/FullPage";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -16,9 +18,12 @@ root.render(
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <FilterProvider>
-      <MainPage />
-    </FilterProvider>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/recipes/roasted-lamb" element={<FullPage />} />
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>
 );
 
