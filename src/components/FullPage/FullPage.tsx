@@ -1,8 +1,19 @@
 import { ThemeProvider } from "@emotion/react";
-import { Box, Card, CssBaseline, Typography, createTheme } from "@mui/material";
+import {
+  Box,
+  Card,
+  Container,
+  CssBaseline,
+  Grid,
+  Typography,
+  createTheme,
+} from "@mui/material";
 import lambPic from "../../foodPics/lamb.jpg";
 import { CardMedia } from "@mui/material";
 import Ingredients from "./Ingredients/Ingredients";
+import { Details } from "@mui/icons-material";
+import { Summary } from "./Summary/Summary";
+import Steps from "./Steps/Steps";
 
 const defaultTheme = createTheme({
   typography: {
@@ -18,57 +29,23 @@ export default function FullPage() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
-      <main>
-        {/* Main page container */}
-        <Box
-          sx={{
-            bgcolor: "background.paper",
-            py: 4,
-            display: "flex",
-          }}
-        >
-          <Box
-            sx={{
-              bgcolor: "background.paper",
-              py: 4,
-            }}
-          >
-            <Typography
-              variant="h5"
-              align="center"
-              color="text.secondary"
-              paragraph
-            >
-              A collection of things that turned out well
-            </Typography>
-          </Box>
-          <Box
-            sx={{
-              bgcolor: "background.paper",
-              py: 4,
-            }}
-          >
-            <CardMedia
-              component="div"
-              sx={{
-                // 16:9
-                pt: "56.25%",
-                width: "60%",
-                height: "60%",
-              }}
-              image={lambPic}
-            />
-            <Typography
-              variant="h5"
-              align="center"
-              color="text.secondary"
-              paragraph
-            >
-              A collection of things that turned out well
-            </Typography>
-          </Box>
-        </Box>
-      </main>
+      <Grid
+        container
+        spacing={2}
+        flexGrow={1}
+        columns={2}
+        padding={"0.5rem"}
+        alignItems={"center"}
+        sx={{ textAlign: "center" }}
+      >
+        <Grid item sx={{ flexGrow: 1 }}>
+          <Ingredients />
+        </Grid>
+        <Grid item sx={{ flexGrow: 1 }}>
+          <Summary pic={lambPic} prepTime={30} cookTime={45} foodYield={2} />
+          <Steps />
+        </Grid>
+      </Grid>
     </ThemeProvider>
   );
 }

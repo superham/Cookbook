@@ -122,9 +122,6 @@ function FilterGroup() {
             sx={{ textAlign: "center" }}
           >
             <Grid item sx={{ flexGrow: 1 }}>
-              <ChipActions text={"Italian"} color="blue" />
-            </Grid>
-            <Grid item sx={{ flexGrow: 1 }}>
               <ChipActions text="American" />
             </Grid>
             <Grid item sx={{ flexGrow: 1 }}>
