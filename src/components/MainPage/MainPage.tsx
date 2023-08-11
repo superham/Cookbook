@@ -67,7 +67,53 @@ export default function MainPage() {
           </Box>
           <Container sx={{ py: 4 }} maxWidth="md">
             {/* End hero unit */}
-            <Grid container spacing={4}>
+            <Grid container spacing={5}>
+              <CardPreview
+                title="Roasted Rack of Lamb"
+                desc="with Carrots and Lemon Quinoa"
+                pic={lambPic}
+                route="/recipes/roasted-lamb"
+                key="lamb"
+              />
+
+              <CardPreview
+                title="Smoked Paprika Chicken"
+                desc="with yellow rice and bread"
+                pic={chickenPic}
+                route="/recipes/paprika-chicken"
+                key="papChicken"
+              />
+
+              <CardPreview
+                title="Lemon Salmon filet"
+                desc="with Garlic Mashed Potatoes, steamed Asparagus"
+                pic={salmonPic}
+                route="/recipes/lemon-salmon"
+                key="lemonSalmon"
+              />
+              <CardPreview
+                title="Roasted Rack of Lamb"
+                desc="with Carrots and Lemon Quinoa"
+                pic={lambPic}
+                route="/recipes/roasted-lamb"
+                key="lamb"
+              />
+
+              <CardPreview
+                title="Smoked Paprika Chicken"
+                desc="with yellow rice and bread"
+                pic={chickenPic}
+                route="/recipes/paprika-chicken"
+                key="papChicken"
+              />
+
+              <CardPreview
+                title="Lemon Salmon filet"
+                desc="with Garlic Mashed Potatoes, steamed Asparagus"
+                pic={salmonPic}
+                route="/recipes/lemon-salmon"
+                key="lemonSalmon"
+              />
               <CardPreview
                 title="Roasted Rack of Lamb"
                 desc="with Carrots and Lemon Quinoa"

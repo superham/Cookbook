@@ -87,6 +87,7 @@ function FilterGroup() {
       maxWidth="md"
       sx={{
         paddingTop: "4rem",
+        paddingBottom: "2rem",
         borderRadius: "4px",
         marginTop: ".5rem",
       }}
@@ -121,6 +122,9 @@ function FilterGroup() {
             alignItems={"center"}
             sx={{ textAlign: "center" }}
           >
+            <Grid item sx={{ flexGrow: 1 }}>
+              <ChipActions text={"Italian"} color="blue" />
+            </Grid>
             <Grid item sx={{ flexGrow: 1 }}>
               <ChipActions text="American" />
             </Grid>
