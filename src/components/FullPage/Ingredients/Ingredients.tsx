@@ -1,4 +1,9 @@
 import { Box, Container, Grid, Paper, Typography } from "@mui/material";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import { useEffect, useState } from "react";
+import listMD from "../../../content/foods/roastedLamb/list.md";
+import desc from "../../../content/foods/roastedLamb/desc.json";
 
 interface IngProps {
   ing: string;
@@ -14,6 +19,15 @@ function Ing({ ing, amt, units }: IngProps) {
 }
 
 export default function Ingredients() {
+  const [list, setList] = useState("");
+
+  // Fetch md obj -> str
+  useEffect(() => {
+    fetch(listMD)
+      .then((res) => res.text())
+      .then((text) => setList(text));
+  });
+
   return (
     <Container
       maxWidth="md"
@@ -25,31 +39,26 @@ export default function Ingredients() {
       <Paper
         elevation={3}
         sx={{
-          maxWidth: "100%",
+          maxWidth: "30%",
           marginRight: "0.5rem",
           marginLeft: "0.5rem",
           display: "flex",
         }}
       >
         <Typography variant="h4" textAlign={"center"}>
-          Lamb
+          {desc.title}
         </Typography>
       </Paper>
       <Paper
         elevation={3}
         sx={{
-          maxWidth: "100%",
+          maxWidth: "30%",
           marginRight: "0.5rem",
           marginLeft: "0.5rem",
           display: "flex",
         }}
       >
-        {/* Steps of the recipe */}
-        <Box sx={{ display: "grid", gridTemplateRows: "repeat(3, 1fr)" }}>
-          <Ing ing="lamb" amt="half rack" units="" />
-          <Ing ing="lemon" amt="1" units="Large Lemon" />
-          <Ing ing="Carrots" amt="3" units="whole carrots" />
-        </Box>
+        <ReactMarkdown children={list} remarkPlugins={[remarkGfm]} />
       </Paper>
     </Container>
   );

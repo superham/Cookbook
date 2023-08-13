@@ -1,4 +1,8 @@
 import { Box, Container, Grid, Paper, Typography } from "@mui/material";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import stepsMD from "../../../content/foods/roastedLamb/steps.md";
+import { useEffect, useState } from "react";
 
 interface StepProps {
   stepNum: number;
@@ -9,25 +13,16 @@ interface InstrProps {
   instr: string;
 }
 
-function Step({ stepNum, instr }: StepProps) {
-  return (
-    <Grid item sx={{ flexGrow: 1 }}>
-      <Typography variant="h4" textAlign={"center"}>
-        1. xys
-      </Typography>
-    </Grid>
-  );
-}
-
-function Inst({ instr }: InstrProps) {
-  return (
-    <Typography variant="h4" textAlign={"center"}>
-      {instr}
-    </Typography>
-  );
-}
-
 export default function Steps() {
+  const [steps, setSteps] = useState("");
+
+  // Fetch md obj -> str
+  useEffect(() => {
+    fetch(stepsMD)
+      .then((res) => res.text())
+      .then((text) => setSteps(text));
+  });
+
   return (
     <Container
       maxWidth="md"
@@ -45,13 +40,7 @@ export default function Steps() {
           display: "flex",
         }}
       >
-        {/* Steps of the recipe */}
-        <Box sx={{ display: "grid", gridTemplateRows: "repeat(3, 1fr)" }}>
-          <Inst instr="cook it" />
-          <Inst instr="watch it" />
-          <Inst instr="stir it" />
-          <Inst instr="let it rest" />
-        </Box>
+        <ReactMarkdown children={steps} />
       </Paper>
     </Container>
   );
