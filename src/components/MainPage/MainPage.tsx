@@ -46,7 +46,6 @@ export default function MainPage() {
         <CssBaseline />
         <SearchAppBar />
         <Filters />
-
         <main>
           {/* Hero unit */}
           <Box>

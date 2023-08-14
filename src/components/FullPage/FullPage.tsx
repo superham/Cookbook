@@ -5,6 +5,7 @@ import {
   Container,
   CssBaseline,
   Grid,
+  Paper,
   Typography,
   createTheme,
 } from "@mui/material";
@@ -29,23 +30,39 @@ export default function FullPage() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <CssBaseline />
-      <Grid
-        container
-        spacing={2}
-        flexGrow={1}
-        columns={2}
-        padding={"0.5rem"}
-        alignItems={"center"}
-        sx={{ textAlign: "center" }}
+      <Container
+        sx={{
+          paddingTop: "4rem",
+          paddingBottom: "2rem",
+          borderRadius: "4px",
+          marginTop: ".5rem",
+          display: "flex",
+        }}
       >
-        <Grid item sx={{ flexGrow: 1 }}>
+        <Paper
+          elevation={3}
+          sx={{
+            maxWidth: "30%",
+            marginRight: "0.5rem",
+            marginLeft: "0.5rem",
+            minWidth: "200px",
+          }}
+        >
           <Ingredients />
-        </Grid>
-        <Grid item sx={{ flexGrow: 1 }}>
+        </Paper>
+        <Paper
+          elevation={3}
+          sx={{
+            maxWidth: "70%",
+            marginRight: "0.5rem",
+            marginLeft: "0.5rem",
+            minWidth: "200px",
+          }}
+        >
           <Summary pic={lambPic} prepTime={30} cookTime={45} foodYield={2} />
           <Steps />
-        </Grid>
-      </Grid>
+        </Paper>
+      </Container>
     </ThemeProvider>
   );
 }

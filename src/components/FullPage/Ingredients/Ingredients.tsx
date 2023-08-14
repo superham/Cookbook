@@ -30,18 +30,15 @@ export default function Ingredients() {
 
   return (
     <Container
-      maxWidth="md"
       sx={{
         borderRadius: "4px",
         marginTop: ".5rem",
+        marginBottom: ".5rem",
       }}
     >
       <Paper
         elevation={3}
         sx={{
-          maxWidth: "30%",
-          marginRight: "0.5rem",
-          marginLeft: "0.5rem",
           display: "flex",
         }}
       >
@@ -52,10 +49,8 @@ export default function Ingredients() {
       <Paper
         elevation={3}
         sx={{
-          maxWidth: "30%",
-          marginRight: "0.5rem",
-          marginLeft: "0.5rem",
           display: "flex",
+          textAlign: "justify",
         }}
       >
         <ReactMarkdown children={list} remarkPlugins={[remarkGfm]} />
