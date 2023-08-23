@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import lambPic from "../../foodPics/lamb.jpg";
 import { CardMedia } from "@mui/material";
-import Ingredients from "./Ingredients/Ingredients";
+import { Ingredients, VirtualizedList } from "./Ingredients/Ingredients";
 import { Details } from "@mui/icons-material";
 import { Summary } from "./Summary/Summary";
 import Steps from "./Steps/Steps";
@@ -49,6 +49,7 @@ export default function FullPage() {
           }}
         >
           <Ingredients />
+          <VirtualizedList />
         </Paper>
         <Paper
           elevation={3}
