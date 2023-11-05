@@ -118,7 +118,7 @@ export function VirtualizedList() {
         height={400}
         width={360}
         itemSize={46}
-        itemCount={ing.length}
+        itemCount={1} // change to 3
         overscanCount={5}
       >
         {renderRow}
